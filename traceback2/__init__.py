@@ -12,6 +12,8 @@ __all__ = ['extract_stack', 'extract_tb', 'format_exception',
            'print_last', 'print_stack', 'print_tb',
            'clear_frames']
 
+__version__ = '1.4.0'
+
 #
 # Formatting and printing lists of traceback lines.
 #
