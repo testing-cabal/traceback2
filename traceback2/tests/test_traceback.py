@@ -607,6 +607,7 @@ class TestStack(unittest.TestCase):
             ['  File "foo.py", line 1, in fred\n    line\n'],
             s.format())
 
+    @unittest.skipUnless(sys.version_info[0] < 3, "Applies to 2.x only.")
     @unittest.skipIf(sys.getfilesystemencoding()=='ANSI_X3.4-1968',
                      'Requires non-ascii fs encoding')
     def test_format_unicode_filename(self):
@@ -651,7 +652,7 @@ class TestStack(unittest.TestCase):
                 traceback.walk_stack(None), capture_locals=True, limit=1)
         s = some_inner(3, 4)
         self.assertEqual(
-            ['  File "' + FNAME + '", line 651, '
+            ['  File "' + FNAME + '", line 652, '
              'in some_inner\n'
              '    traceback.walk_stack(None), capture_locals=True, limit=1)\n'
              '    a = 1\n'
