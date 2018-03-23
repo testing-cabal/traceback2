@@ -747,6 +747,30 @@ class TestTracebackException(unittest.TestCase):
         self.assertEqual(exc_info[0], exc.exc_type)
         self.assertEqual(str(exc_info[1]), str(exc))
 
+    def test_unhashable(self):
+        class UnhashableException(Exception):
+            __hash__ = None
+
+            def __eq__(self, other):
+                return True
+
+        ex1 = UnhashableException('ex1')
+        ex2 = UnhashableException('ex2')
+        try:
+            raise_from(ex2, ex1)
+        except UnhashableException:
+            try:
+                raise ex1
+            except UnhashableException:
+                exc_info = sys.exc_info()
+        exc = traceback.TracebackException(*exc_info)
+        formatted = list(exc.format())
+        if six.PY2:
+            self.assertIn('UnhashableException: ex1\n', formatted[2])
+        else:
+            self.assertIn('UnhashableException: ex2\n', formatted[3])
+            self.assertIn('UnhashableException: ex1\n', formatted[7])
+
     def test_limit(self):
         def recurse(n):
             if n:
