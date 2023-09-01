@@ -25,7 +25,7 @@ except ImportError:
     else:
         def raise_from(value, from_value):
             raise value
-import unittest2 as unittest
+import unittest
 import testtools
 from testtools.matchers import DocTestMatches, Equals, MatchesAny
 
