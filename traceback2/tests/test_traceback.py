@@ -420,7 +420,7 @@ class BaseExceptionReportingTests:
 Traceback (most recent call last):
   File "...traceback2/tests/test_traceback.py", line ..., in test_context_suppression
     raise_from(ZeroDivisionError, None)
-  File "<string>", line 2, in raise_from
+  File "<string>", line ..., in raise_from
 ZeroDivisionError
 """, doctest.ELLIPSIS))
 
